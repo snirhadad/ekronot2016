@@ -93,29 +93,29 @@ function compile(string $line): string {
   return $retString;
 }
 
-function ifgoto(string label):string
+function ifgoto(string $label):string
 {
   $retString=popToReg('D');
   $retString.="@";
   $retString.="";
   $retString.="$";
-  $retString.=label '.' "\n";
+  $retString.=$label '.' "\n";
   $retString.="D ; JNE";
   return $retString;
 }
-function gotofunc(string label):string
+function gotofunc(string $label):string
 {
   $retString="@";
   $retString.="";//check pagaro's code he wrote currentfunctionname i didnt get it
-  $retString.=label '.' "\n";
+  $retString.=$label '.' "\n";
   $retString.="1 ; JMP\n";
   return $retString;
 }
-function label(string label):string {
+function label(string $label):string {
   $retString="(";
   $retString.="";//check pagaro's code he wrote currentfunctionname i didnt get it
   $retString.="$";
-  $retString.=label;
+  $retString.=$label;
   $retString.=")";
 
   return $retString;
