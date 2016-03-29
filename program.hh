@@ -1,4 +1,4 @@
-﻿/*
+/*
 תרגיל מס' 2
 שלום שטיינבך - 327161444
 שניר חדד - 208938357
@@ -79,8 +79,44 @@ function compile(string $line): string {
     case "pop":
       $retString = pop($command[1], $command[2]);
       break;
+    case "label":
+      $retString=label($command[1]);
+      break;
+    case "goto":
+      $retString=gotofunc($command[1]);
+      break;
+    case "if-goto":
+      $retString=ifgoto($command[1]);
     default:
   }
+
+  return $retString;
+}
+
+function ifgoto(string label):string
+{
+  $retString=popToReg('D');
+  $retString.="@";
+  $retString.="";
+  $retString.="$";
+  $retString.=label '.' "\n";
+  $retString.="D ; JNE";
+  return $retString;
+}
+function gotofunc(string label):string
+{
+  $retString="@";
+  $retString.="";//check pagaro's code he wrote currentfunctionname i didnt get it
+  $retString.=label '.' "\n";
+  $retString.="1 ; JMP\n";
+  return $retString;
+}
+function label(string label):string {
+  $retString="(";
+  $retString.="";//check pagaro's code he wrote currentfunctionname i didnt get it
+  $retString.="$";
+  $retString.=label;
+  $retString.=")";
 
   return $retString;
 }
